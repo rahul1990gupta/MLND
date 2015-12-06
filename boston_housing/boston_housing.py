@@ -8,9 +8,6 @@ import pylab as pl
 from sklearn import datasets
 from sklearn.tree import DecisionTreeRegressor
 
-################################
-### ADD EXTRA LIBRARIES HERE ###
-################################
 import sklearn
 from sklearn import metrics
 from sklearn.utils import shuffle
@@ -33,33 +30,20 @@ def explore_city_data(city_data):
 	housing_features = city_data.data
 
 	
-	###################################
-	### Step 1. YOUR CODE GOES HERE ###
-	###################################
-	
-	# Please calculate the following values using the Numpy library
-	# Size of data?
 	print "Size of the data is: %d" %len(housing_prices)
 	
-	# Number of features?
 	print "Number of features for the data is: %d" %len(housing_features[0])
 	
-	# Minimum value?
 	print "Minimum Housing price in Boston is: %0.2f" %min(housing_prices)
 	
-	# Maximum Value?
 	print "Maximum Housing price in Boston is: %0.2f" %max(housing_prices)
 	
-	# Frequency Distribution ?
 	counter =collections.Counter(housing_prices)
 
-	# Calculate mean?
 	print "Mean Housing price in Boston is: %0.2f" %np.mean(housing_prices)
 	
-	# Calculate median?
 	print "Median Housing price in Boston is: %0.2f" %np.median(housing_prices)
 	
-	# Calculate standard deviation?
 	print "Standard deviation of  Housing price in Boston is: %0.2f" %np.std(housing_prices)
 	
 	pl.figure()
@@ -71,12 +55,6 @@ def explore_city_data(city_data):
 
 def performance_metric(label, prediction):
 	'''Calculate and return the appropriate performance metric.'''
-
-	###################################
-	### Step 2. YOUR CODE GOES HERE ###
-	###################################
-
-	# http://scikit-learn.org/stable/modules/classes.html#sklearn-metrics-metrics
 	return metrics.mean_squared_error(label, prediction)
 	
 
@@ -86,10 +64,6 @@ def split_data(city_data):
 
 	# Get the features and labels from the Boston housing data
 	X, y = city_data.data, city_data.target
-
-	###################################
-	### Step 3. YOUR CODE GOES HERE ###
-	###################################
 
 	X_train, X_test, y_train, y_test = sklearn.cross_validation.train_test_split(X, y, test_size=0.30, random_state=42)
 
@@ -186,19 +160,9 @@ def fit_predict_model(city_data):
 
 	parameters = {'max_depth':(1,2,3,4,5,6,7,8,9,10)}
 
-	###################################
-	### Step 4. YOUR CODE GOES HERE ###
-	###################################
 	
-	# 1. Find the best performance metric
-	# should be the same as your performance_metric procedure
-	# http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html
-
 	reg = GridSearchCV(regressor, parameters,scoring=make_scorer(metrics.mean_squared_error,greater_is_better=False))
 	print reg.fit(X, y)
-
-	# 2. Use gridearch to fine tune the Decision Tree Regressor and find the best model
-	# http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV
 
 	depth_values= list()
 	for i in xrange(101):
